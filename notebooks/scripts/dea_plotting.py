@@ -270,7 +270,7 @@ def rgb(ds,
             img.figure.savefig(savefig_path, **savefig_kwargs)
 
             
-def display_map(x, y, crs='EPSG:4326', margin=-0.5, zoom_bias=0):
+def display_map(x, y, crs='EPSG:28355', margin=-0.5, zoom_bias=0):
     """ 
     Given a set of x and y coordinates, this function generates an 
     interactive map with a bounded rectangle overlayed on Google Maps 
@@ -289,7 +289,7 @@ def display_map(x, y, crs='EPSG:4326', margin=-0.5, zoom_bias=0):
         A tuple of y coordinates in (min, max) format.
     crs : string, optional
         A string giving the EPSG CRS code of the supplied coordinates. 
-        The default is 'EPSG:4326'.
+        The default is 'EPSG:28355'.
     margin : float
         A numeric value giving the number of degrees lat-long to pad 
         the edges of the rectangular overlay polygon. A larger value 
@@ -313,7 +313,7 @@ def display_map(x, y, crs='EPSG:4326', margin=-0.5, zoom_bias=0):
     all_x = (x[0], x[1], x[0], x[1])
     all_y = (y[0], y[0], y[1], y[1])
     all_longitude, all_latitude = transform(Proj(crs),
-                                            Proj('EPSG:4326'),
+                                            Proj('EPSG:28355'),
                                             all_x, all_y)
 
     # Calculate zoom level based on coordinates
@@ -439,7 +439,7 @@ def map_shapefile(gdf,
                                  f"{gdf.columns.values}.")
 
     # Convert to WGS 84 and GeoJSON format
-    gdf_wgs84 = gdf.to_crs(epsg=4326)
+    gdf_wgs84 = gdf.to_crs(epsg=28355)
     data_geojson = gdf_wgs84.__geo_interface__
     
     # If continuous is False, remap categorical classes for visualisation
